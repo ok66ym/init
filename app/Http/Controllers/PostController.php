@@ -26,4 +26,9 @@ class PostController extends Controller
         //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
         // return $post->get();//Postモデルのgetメソッドの実行結果として$postの中身を戻り値にする．
     }
+    
+    public function show(Post $post) {
+        return view('posts.show')->with(['post' => $post]);
+        //'post'は，baldeファイルで使用する変数．中身は$postはid=1のPostインスタンス．
+    }
 }
