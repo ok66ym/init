@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 //use宣言は外部にあるクラスをPostController内にインポートできる。
 //この場合、App\Models内のPostクラスをインポートしている。
@@ -37,7 +37,7 @@ class PostController extends Controller
         //postsの中のcreate.blade.phpを返却する
     }
     
-    public function store(Request $request, Post $post) {
+    public function store(Post $post, PostRequest $request) {
         $input = $request['post'];
         $post -> fill($input) -> save();
         return redirect('/posts/' . $post -> id);
