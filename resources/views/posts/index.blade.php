@@ -17,11 +17,25 @@
                     <a href="/posts/{{$post -> id}}">{{$post -> title}}</a>
                 </h2>
                 <p class='body'>{{$post->body}}</p>
+                <form action="/posts/{{$post -> id}}" id="form_{{$post -> id}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <form type="button" onclick="deletePost({{$post -> id}})">delete</form>
+                </form>
             </div>
         @endforeach
     </div>
     <div class='paginate'>
         {{$posts->links() }}
     </div>
+    <script>
+        function deletePost(id) {
+            'use strict'
+            if (confirm('削除すると復元できません．\n本当に削除しますか?')) {
+                document.getElementById(`form_${id}`).submit(); 
+                //'form_${id}'は``<バッククオートで囲む>
+            }
+        }
+    </script>
 </body>
 </html>
