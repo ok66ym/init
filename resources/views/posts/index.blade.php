@@ -17,11 +17,12 @@
                     <a href="/posts/{{$post -> id}}">{{$post -> title}}</a>
                 </h2>
                 <p class='body'>{{$post->body}}</p>
-                <form action="/posts/{{$post -> id}}" id="form_{{$post -> id}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <form type="button" onclick="deletePost({{$post -> id}})">delete</form>
+                <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" onclick="deletePost({{ $post->id }})">delete</button> 
                 </form>
+
             </div>
         @endforeach
     </div>
@@ -33,7 +34,8 @@
             'use strict'
             if (confirm('削除すると復元できません．\n本当に削除しますか?')) {
                 document.getElementById(`form_${id}`).submit(); 
-                //'form_${id}'は``<バッククオートで囲む>
+                //'form_${id}'は``<バッククオートで囲む>→文字列の中で変数を扱うことができる．
+                //getElementByIdの引数は，<form>タグでの呼び出し時にidを引数として与える．
             }
         }
     </script>
