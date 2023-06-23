@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Models\Category;
 //use宣言は外部にあるクラスをPostController内にインポートできる。
 //この場合、App\Models内のPostクラスをインポートしている。
 //PostController.php内でPost.phpのPostクラスを使用したいため
@@ -32,13 +33,13 @@ class PostController extends Controller
         //'post'は，baldeファイルで使用する変数．中身は$postはid=1のPostインスタンス．
     }
     
-    public function create() {
-        return view('posts.create');
+    public function create(Category $category) {
+        return view('posts.create')->with(['categories' => $category->get()]);
         //postsの中のcreate.blade.phpを返却する
     }
     
     public function store(Post $post, PostRequest $request) {
-        $input = $request['post'];
+        $input = $request['post']; 
         $post -> fill($input) -> save();
         return redirect('/posts/' . $post -> id);
     }
