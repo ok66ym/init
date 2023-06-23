@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;    //外部にあるPostControllerクラスをインポート
+use App\Http\Controllers\PostController;  //外部にあるPostControllerクラスをインポート
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,9 @@ use App\Http\Controllers\PostController;    //外部にあるPostControllerク�
 |
 */
 Route::get('/', [PostController::class, 'index']);
+
+Route::get('/categories/{category}', [CategoryController::class, 'index']);
+// /categories/{category}：/id(categoriesテーブルのid)を受け取ったときindex関数を呼び出す．
 
 Route::get('/posts/create', [PostController::class, 'create']);
 //showメソッドの呼び出しよりも先に記述する必要がある
