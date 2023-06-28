@@ -9,6 +9,15 @@
 </head>
 <x-app-layout>
     <body>
+        <div>
+            @foreach($questions as $question)
+                <div>
+                    <a href="https://teratail.com/questions/{{ $question['id'] }}">
+                        {{ $question['title'] }}
+                    </a>
+                </div>
+            @endforeach
+        </div>
         <a href="/posts/create">[create]</a>
         <h1><b>Blog Name</b></h1>
         <div class='posts'>
@@ -32,7 +41,7 @@
             {{$posts->links() }}
         </div>
         
-         <p>ログインユーザー：{{ Auth::user()->name }}</p>
+        <p>ログインユーザー：{{ Auth::user()->name }}</p>
         
         <script>
             function deletePost(id) {
