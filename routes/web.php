@@ -35,6 +35,9 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
 //routing of CategoryController
 Route ::get('/categories/{category}', [CategoryController::class, 'index'])->middleware("auth");
 
+//routing of UserCOntroller
+Route::get('/user', 'UserController@index');
+
 //routing of UserInformation
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

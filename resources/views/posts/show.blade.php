@@ -10,11 +10,9 @@
 <x-app-layout>
     <body>
         <h1 class=title>
-            {{$post -> title}}
+            タイトル：{{$post -> title}}
         </h1>
-        <div class="edit">
-            <a href="/posts/{{$post -> id}}/edit">edit</a>
-        </div>
+        
         <div class='content'>
                 <div class='content_post'>
                     <h3>本文</h3>
@@ -24,7 +22,15 @@
                 </div>
         </div>
         
-        <a href="/categories/{{$post->category->id}}">{{$post -> category -> name}}</a>
+        <a href="/categories/{{$post->category->id}}">カテゴリー：{{$post -> category -> name}}<br></a>
+        
+        <!--Postインスタンスのプロパティとして投稿者の名前情報を参照-->
+                    <small>投稿者：{{ $post->user->name }}<br><br></small>
+                    
+        <div class="edit">
+            <a href="/posts/{{$post -> id}}/edit">編集する</a>
+        </div>
+        
         <div class='footer'>
             <a href="/">戻る</a>
         </div>
