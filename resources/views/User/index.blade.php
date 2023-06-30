@@ -19,33 +19,31 @@
             @endforeach
         </div>
         <a href="/posts/create">[create]</a>
-        <h1><b>ブログ一覧</b></h1>
-        <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <h2 class='title'>
-                        <a href="/posts/{{$post -> id}}">タイトル：{{$post -> title}}</a>
-                    </h2>
-                    
-                    <p class='body'>本文<br>{{$post->body}}</p>
-                    
-                    <a href="/categories/{{$post->category->id}}">カテゴリー：{{$post -> category -> name}}<br></a>
-                    
-                    <!--Postインスタンスのプロパティとして投稿者の名前情報を参照-->
-                    <small>投稿者：{{ $post->user->name }}<br></small>
-                    
-                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" onclick="deletePost({{ $post->id }})">投稿を削除する</button> 
-                    </form>
-    
+        <h1><b>Blog Name</b></h1>
+        @section('content')
+            <div class='own_posts'>
+                @foreach ($own_posts as $post)
+                    <div class='post'>
+                        <h2 class='title'>
+                            <a href="/posts/{{$post -> id}}">{{$post -> title}}</a>
+                        </h2>
+                        <!--Postインスタンスのプロパティとして投稿者の名前情報を参照-->
+                        <small>{{ $post->user->name }}</small>
+                        <a href="/categories/{{$post->category->id}}">{{$post -> category -> name}}</a>
+                        <p class='body'>{{$post->body}}</p>
+                        <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="deletePost({{ $post->id }})">delete</button> 
+                        </form>
+                    </div>
+                @endforeach
+            
+                <div class='paginate'>
+                    {{$own_posts->links() }}
                 </div>
-            @endforeach
-        </div>
-            <div class='paginate'>
-                {{$posts->links() }}<br>
             </div>
+        @endsection
         
         <p>ログインユーザー：{{ Auth::user()->name }}</p>
         

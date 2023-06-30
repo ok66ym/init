@@ -15,15 +15,16 @@
                 @csrf
                 @method('PUT')
                 <dov class="content_title">
-                    <h2>Title</h2>
+                    <h2>タイトル</h2>
                     <input type="text" name="post[title]" value="{{$post -> title}}"/>
                     <p class="title_error" style="color:red">{{$errors -> first('post.title')}}</p>
                 </dov>
                 <div class="content_body">
+                    <h2>本文</h2>
                     <input type="text" name="post[body]" value="{{$post -> body}}"/>
-                    <p class="body_error" style="color:red">{{$errors -> first('post.body')}}</p>
+                    <p class="body_error" style="color:red">{{$errors -> first('post.body')}}<br></p>
                 </div>
-                <input type="submit" value="store"/>
+                <input type="submit" value="修正"/>
             </form>
         </div>
     </body>
